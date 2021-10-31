@@ -100,6 +100,11 @@ x = np.linspace(1, 10, 500)
 y = np.mean(const) / x
 
 plt.plot(x, y)
+plt.xlabel('V')
+plt.ylabel('P')
+plt.title('P vs V')
+plt.legend(["PV=const"])
+
 plt.show()
 
 # now to summarize
