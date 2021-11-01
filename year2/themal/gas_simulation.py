@@ -37,23 +37,20 @@ def move(i, gas, N, L, hits_r, hits_l, hits_u, hits_d, m):
             c.vy = -c.vy
         c.center = currentx+c.vx, currenty+c.vy
 
-def run_sim(L):
+def run_sim(L, N, m, v):
     # Build a world
-    plt.figure('Our first world')
-    plt.clf()
-    plt.gca().set_aspect('equal')
+    # plt.figure('Our first world')
+    # plt.clf()
+    # plt.gca().set_aspect('equal')
     V = L*1  # two-dimensional volume
-    plt.plot(np.array([0, L, L, 0, 0]), np.array([0, 0, 1, 1, 0]), 'k')
-    plt.plot(np.array([L, L]), np.array([1, 0]), color='orange')
-    plt.plot(np.array([0, 0]), np.array([0, 1]), color='red')
-    plt.plot(np.array([0, L]), np.array([0, 0]), color='green')
-    plt.plot(np.array([0, L]), np.array([1, 1]), color='orange')
-    plt.title(f'A model of a piston Volume = {V}')
+    # plt.plot(np.array([0, L, L, 0, 0]), np.array([0, 0, 1, 1, 0]), 'k')
+    # plt.plot(np.array([L, L]), np.array([1, 0]), color='orange')
+    # plt.plot(np.array([0, 0]), np.array([0, 1]), color='red')
+    # plt.plot(np.array([0, L]), np.array([0, 0]), color='green')
+    # plt.plot(np.array([0, L]), np.array([1, 1]), color='orange')
+    # plt.title(f'A model of a piston Volume = {V}')
     # add molecules of gas
     r = 0.01  # radius of a molecule
-    N = 150  # number of gas molecules
-    m = 1  # mass of a single molecule
-    v = 0.01  # absolute value of velocity
     gas = []  # a list of gas molecules
     for n in range(N):
         # choose a random location of the particles (but leave a 2r
@@ -157,6 +154,108 @@ def s3():
           "Pressure on upper wall {}\n"
           "Pressure on bottom wall {}".format(str(P_r), str(P_l), str(P_u), str(P_d)))
 
+def s3b():
+    res = {0.002521720522661402: 50,
+            0.005042967581253781: 100,
+            0.007564375349989518: 150,
+            0.010084975791398467: 200,
+            0.01260621061501792: 250,
+            0.015128401653329529: 300,
+            0.017649998336445: 350,
+            0.020168387193811067: 400,
+            0.02268493919532535: 450,
+            0.025212499691009575: 500}
+    # N = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
+    # for n in N:
+    #     res = {'r': [], 'u': [], 'd': [], 'l': []}
+    #     for _ in range(10):
+    #         V, P_r, P_l, P_u, P_d = run_sim(1, n, 1, 0.01)
+    #         res['r'].append(P_r)
+    #         res['u'].append(P_u)
+    #         res['d'].append(P_d)
+    #         res['l'].append(P_l)
+    #
+    #     P_r = abs(np.mean(res['r']))
+    #     P_l = abs(np.mean(res['l']))
+    #     P_u = abs(np.mean(res['u']))
+    #     P_d = abs(np.mean(res['d']))
+    #     P = np.mean([P_r, P_l, P_u, P_d])
+
+    x = res.values()
+    y = res.keys()
+    plt.plot(x, y, 'o')
+    plt.grid()
+    plt.show()
+
+def s4():
+    res = {0.007562161058513448:1,
+           0.015125490651225322:2,
+           0.022688096027486275: 3,
+           0.030258039613829585: 4,
+           0.037803829548286406: 5,
+            0.04537605099912437:6,
+            0.05295728164903268:7,
+            0.06049879470404259:8,
+            0.0680761285615923:9,
+            0.07563437322434387:10}
+    # M = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    # for m in M:
+    #     res = {'r': [], 'u': [], 'd': [], 'l': []}
+    #     for _ in range(10):
+    #         V, P_r, P_l, P_u, P_d = run_sim(1, 150, m, 0.01)
+    #         res['r'].append(P_r)
+    #         res['u'].append(P_u)
+    #         res['d'].append(P_d)
+    #         res['l'].append(P_l)
+    #
+    #     P_r = abs(np.mean(res['r']))
+    #     P_l = abs(np.mean(res['l']))
+    #     P_u = abs(np.mean(res['u']))
+    #     P_d = abs(np.mean(res['d']))
+    #     P = np.mean([P_r, P_l, P_u, P_d])
+    #
+    #     print(P, m)
+    x = res.values()
+    y = res.keys()
+    plt.plot(x, y, 'o')
+    plt.grid()
+    plt.show()
+
+def s5():
+    res = {0.007567366961075095:0.01,
+            0.0305136756320131:0.02,
+            0.06924783485605052:0.03,
+            0.12430173554991421:0.04,
+            0.19585889297415782:0.05,
+            0.2842393545891846:0.06,
+            0.3915553370353595:0.07,
+            0.5150221175208352:0.08,
+            0.6575890730903173:0.09,
+            0.8205799744493327:0.1}
+    # V = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1]
+    # for v in V:
+    #     res = {'r': [], 'u': [], 'd': [], 'l': []}
+    #     for _ in range(10):
+    #         V, P_r, P_l, P_u, P_d = run_sim(1, 150, 1, v)
+    #         res['r'].append(P_r)
+    #         res['u'].append(P_u)
+    #         res['d'].append(P_d)
+    #         res['l'].append(P_l)
+    #
+    #     P_r = abs(np.mean(res['r']))
+    #     P_l = abs(np.mean(res['l']))
+    #     P_u = abs(np.mean(res['u']))
+    #     P_d = abs(np.mean(res['d']))
+    #     P = np.mean([P_r, P_l, P_u, P_d])
+    #
+    #     print(P, v)
+    #     plt.plot(v, P)
+    # plt.show()
+    x = res.values()
+    y = res.keys()
+    plt.plot(x, y, 'o')
+    plt.grid()
+    plt.show()
 
 if __name__ == '__main__':
-    s3()
+    s5()
