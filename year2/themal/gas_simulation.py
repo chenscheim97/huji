@@ -75,7 +75,7 @@ def run_sim(L, N, m, v):
     hits_d = []
     while (i < max_iterations):
         move(i, gas, N, L, hits_r, hits_l, hits_u, hits_d, m)
-        # plt.pause(0.001)  # add a little pause to update monitor
+        plt.pause(0.001)  # add a little pause to update monitor
                           # but if you want a faster simulation, comment
                           # this out
         i += 1  # time moves forward
@@ -181,10 +181,19 @@ def s3b():
     #     P_d = abs(np.mean(res['d']))
     #     P = np.mean([P_r, P_l, P_u, P_d])
 
-    x = res.values()
-    y = res.keys()
-    plt.plot(x, y, 'o')
+    x_1 = list(res.values())
+    y_1 = list(res.keys())
+    m = (y_1[-1] - y_1[0]) / (x_1[-1] - x_1[0])
+    x = np.linspace(min(x_1), max(x_1), 100)
+
+    y = m*x
+    print(m)
+    plt.plot(x_1, y_1, 'o')
+    plt.plot(x, y)
     plt.grid()
+    plt.xlabel("N [number of molecule]")
+    plt.ylabel("P [pressure]")
+    plt.title("P(N) = Const\nconst = {}".format(str(m)))
     plt.show()
 
 def s4():
@@ -215,10 +224,19 @@ def s4():
     #     P = np.mean([P_r, P_l, P_u, P_d])
     #
     #     print(P, m)
-    x = res.values()
-    y = res.keys()
-    plt.plot(x, y, 'o')
+    x_1 = list(res.values())
+    y_1 = list(res.keys())
+    m = (y_1[-1] - y_1[0]) / (x_1[-1] - x_1[0])
+    x = np.linspace(min(x_1), max(x_1), 100)
+
+    y = m*x
+    print(m)
+    plt.plot(x_1, y_1, 'o')
+    plt.plot(x, y)
     plt.grid()
+    plt.xlabel("m [mass of molecule]")
+    plt.ylabel("P [pressure]")
+    plt.title("P(m) = Const\nconst = {}".format(str(m)))
     plt.show()
 
 def s5():
@@ -258,4 +276,7 @@ def s5():
     plt.show()
 
 if __name__ == '__main__':
-    s5()
+    # run_sim(1, 150, 1, 0.01)
+    s3b()
+    # s4()
+    # s5()
